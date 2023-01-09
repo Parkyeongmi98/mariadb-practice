@@ -17,7 +17,7 @@ select concat(first_name, " ", last_name) as '이름',
 
 -- 문제3.
 -- 여직원과 남직원은 각 각 몇 명이나 있나요?(group by 사용, if문)
-select if (gender ='M', '남자', '여자') as '성별', count(*) as '인원수'
+select if (gender = 'M', '남자', '여자') as '성별', count(*) as '인원수'
 	from employees
 	group by gender;
 

@@ -1,12 +1,4 @@
--- explore datas....
-show tables;
-
-select count(*) from employees;
-select count(*) from departments;
-select count(*) from titles;
-select count(*) from salaries;
-
--- select 기본 (1.from 2.where 3.order by)
+-- select 기본 -> 순서 1.from 2.where 3.order by
 -- 예제1: departments 테이블의 모든 데이터 출력
 select * from departments;
 
@@ -50,6 +42,7 @@ select first_name, gender, hire_date
     where hire_date < '1989-01-01'
     and gender = 'F';
 
+--
 -- in 연산자
 -- 예제3: dept_emp 테이블에서 부서 번호가 d005나 d009에 속한 사원의 사번, 부서번호 출력
 select emp_no, dept_no 
@@ -106,7 +99,7 @@ select first_name as '이름', gender as '성별', hire_date as '입사일'
 select emp_no, salary, from_date, to_date
 	from salaries
     order by emp_no asc, salary desc;
-    
+
 
     
 
