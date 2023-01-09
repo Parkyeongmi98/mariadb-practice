@@ -41,5 +41,19 @@ use webdb;  -- 모델 생성 후 webdb 사용
 select * from pet;
 
 insert into pet values('성탄이', '안대혁', 'dog', 'm', '2007-12-25', null);
+
+-- select: DML(R) -> read
 select * from pet;
 
+-- update: DML(U) -> update
+update pet set name = '구름이' where name = '성탄이';
+
+-- delete: DBL(D) -> delete
+delete from pet where name = '구름이';
+
+-- load data
+load data local infile 'd:\pet.txt' into table pet;
+
+-- select
+select * from pet where name = 'bowser';
+select name, species from pet where name = 'bowser';
