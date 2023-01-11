@@ -46,7 +46,7 @@ select a.emp_no as '사번',
     and d.to_date = '9999-01-01'
     and e.to_date = '9999-01-01'
     order by 이름 asc;
-
+    
 -- 문제5.
 -- ‘Technique Leader’의 직책으로 과거에 근무한 적이 있는 모든 사원의 사번과 이름을 출력하세요. 
 -- 현재 ‘Technique Leader’의 직책으로 근무하는 사원은 고려하지 않습니다.
