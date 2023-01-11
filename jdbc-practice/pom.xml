@@ -12,6 +12,15 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
+	<!-- MariaDB JDBC Driver -->
+	<dependencies>
+		<dependency>
+	    	<groupId>org.mariadb.jdbc</groupId>
+	    	<artifactId>mariadb-java-client</artifactId>
+	    	<version>3.0.8</version>
+		</dependency>
+	</dependencies>
+	
 	<build>
 		<finalName>jdbc-practice</finalName>
   	</build>
