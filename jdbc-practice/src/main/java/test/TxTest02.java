@@ -76,9 +76,11 @@ public class TxTest02 {
 			
 		} catch (SQLException e) {
 			// 에러나면 롤백
-			//conn.rollback();
+			conn.rollback();
 			e.printStackTrace();
-		} 
+		} finally {
+			conn.setAutoCommit(true);
+		}
 		
 	}
 
