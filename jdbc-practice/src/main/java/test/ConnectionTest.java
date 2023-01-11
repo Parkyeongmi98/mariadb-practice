@@ -22,7 +22,15 @@ public class ConnectionTest {
 			System.out.println("드라이버 로딩 실패: " + e);;
 		} catch (SQLException e) {
 			System.out.println("error: " + e);;
-		} 
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
