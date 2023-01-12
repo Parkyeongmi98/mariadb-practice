@@ -67,7 +67,7 @@ select b.emp_no, b.first_name, c.salary
 
 -- 문제4.
 -- 현재, 사원들의 사번, 이름, 매니저 이름, 부서 이름으로 출력해 보세요.
-select b.dept_name as '부서', concat(a.first_name, ' ', a.last_name) as '매니저이름'
+select b.dept_name as '부서이름', concat(a.first_name, ' ', a.last_name) as '매니저이름'
 	from employees a, departments b, dept_manager c, titles d
     where a.emp_no = c.emp_no
     and c.dept_no = b.dept_no
@@ -162,3 +162,34 @@ select a.title, avg(b.salary) as 평균급여
 -- 문제8.
 -- 현재 자신의 매니저보다 높은 급여를 받고 있는 직원은?
 -- 부서이름, 사원이름, 급여, 매니저 이름, 메니저 급여 순으로 출력합니다.
+select b.dept_name as 부서이름, c.dept_no as 부서, e.salary as 매니저급여,
+		concat(a.first_name, ' ', a.last_name) as 매니저이름
+	from employees a, departments b, dept_manager c, titles d, salaries e
+	where a.emp_no = c.emp_no
+	and c.dept_no = b.dept_no
+	and c.emp_no = d.emp_no
+	and d.emp_no = e.emp_no
+	and c.to_date = '9999-01-01'
+	and d.to_date = '9999-01-01'
+	and e.to_date = '9999-01-01'
+	and d.title = 'Manager';  -- 매니저 이름, 급여 출력
+    
+select e.부서이름, concat(a.first_name, ' ', a.last_name) as 사원이름, c.salary as 급여, e.매니저이름, e.매니저급여
+	from employees a, dept_manager b, salaries c,
+		(select b.dept_name as 부서이름, c.dept_no as 부서, e.salary as 매니저급여,
+				concat(a.first_name, ' ', a.last_name) as 매니저이름
+			from employees a, departments b, dept_manager c, titles d, salaries e
+			where a.emp_no = c.emp_no
+			and c.dept_no = b.dept_no
+			and c.emp_no = d.emp_no
+            and d.emp_no = e.emp_no
+			and c.to_date = '9999-01-01'
+			and d.to_date = '9999-01-01'
+            and e.to_date = '9999-01-01'
+			and d.title = 'Manager') e
+	where a.emp_no = b.emp_no
+    and b.emp_no = c.emp_no
+    and c.to_date = '9999-01-01'
+    and b.dept_no = e.부서
+    and c.salary > e.매니저급여;  -- 정답
+
