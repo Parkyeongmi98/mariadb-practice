@@ -22,18 +22,6 @@ public class AuthorDaoTest {
       dao.insert(vo);
       
       vo = new AuthorVo();
-      vo.setName("스테파니메이어");
-      dao.insert(vo);
-      
-      vo = new AuthorVo();
-      vo.setName("스테파니메이어");
-      dao.insert(vo);
-      
-      vo = new AuthorVo();
-      vo.setName("스테파니메이어");
-      dao.insert(vo);
-      
-      vo = new AuthorVo();
       vo.setName("조정래");
       dao.insert(vo);
       
@@ -47,10 +35,6 @@ public class AuthorDaoTest {
       
       vo = new AuthorVo();
       vo.setName("천상병");
-      dao.insert(vo);
-      
-      vo = new AuthorVo();
-      vo.setName("조정래");
       dao.insert(vo);
       
       vo = new AuthorVo();
