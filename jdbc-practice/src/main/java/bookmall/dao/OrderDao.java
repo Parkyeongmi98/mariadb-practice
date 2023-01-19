@@ -22,11 +22,11 @@ public class OrderDao {
 			conn = getConnection();
 				
 			// 3. Statement 준비
-			String sql = "select a.no, a.order_no, c.name, c.email, b.count * d.price as price, a.address, d.no, d.title, b.count " 
-						+ " from orders a, cart b, user c, book d"
-						+ " where a.cart_no = b.no"
-						+ " and a.user_no = c.no"
-						+ " and b.book_no = d.no"
+			String sql = "select a.no, a.order_no, d.name, d.email, sum(b.count * c.price), a.address"
+						+ " from orders a, cart b, book c, user d"
+						+ " where a.user_no = b.user_no"
+						+ " and b.book_no = c.no"
+						+ " and a.user_no = d.no"
 						+ " order by a.no desc";
 			pstmt = conn.prepareStatement(sql);
 				
@@ -43,9 +43,6 @@ public class OrderDao {
 				vo.setOrderEmail(rs.getString(4));
 				vo.setPrice(rs.getInt(5));
 				vo.setAddress(rs.getString(6));
-				vo.setBookNumber(rs.getLong(7));
-				vo.setBookTitle(rs.getString(8));
-				vo.setCount(rs.getLong(9));
 				
 				result.add(vo);
 			}
@@ -79,14 +76,14 @@ public class OrderDao {
 			conn = getConnection();
 			
 			// 3. Statement 준비
-			String sql = "insert into orders(no, order_no, price, address, user_no, cart_no) values(null, ?, ?, ?, ?, ?)";
+			String sql = "insert into orders(no, order_no, price, address, user_no, order_book_no) values(null, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getOrderNo());
 			pstmt.setInt(2, vo.getPrice());
 			pstmt.setString(3, vo.getAddress());
 			pstmt.setLong(4, vo.getUserNo());
-			pstmt.setLong(5, vo.getCartNo());
+			pstmt.setLong(5, vo.getOrderBookNo());
 		
 			// 4. SQL 실행
 			pstmt.executeUpdate();

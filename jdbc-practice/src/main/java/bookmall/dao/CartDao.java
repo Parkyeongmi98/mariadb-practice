@@ -64,6 +64,60 @@ public class CartDao {
 			
 		return result;
 	}
+	
+	public List<CartVo> OrderBookFind() {
+		List<CartVo> result = new ArrayList<>();
+			
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+			
+		try {
+			conn = getConnection();
+				
+			// 3. Statement 준비
+			String sql = "select b.no, b.title, c.count" 
+						+ " from order_book a, book b, cart c"
+						+ " where a.book_no = b.no"
+						+ " and a.cart_no = c.no"
+						+ " order by a.no desc";
+			pstmt = conn.prepareStatement(sql);
+				
+				
+			// 4. SQL 실행
+			rs = pstmt.executeQuery(); 
+				
+			// 5. 결과 처리
+			while (rs.next()) {
+				CartVo vo = new CartVo();
+				vo.setNo(rs.getLong(1));
+				vo.setTitle(rs.getString(2));
+				vo.setCount(rs.getLong(3));
+				
+				result.add(vo);
+			}
+				
+		} catch (SQLException e) {
+			System.out.println("error: " + e);;
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+		}
+			
+		return result;
+	}
+
 
 	public void insert(CartVo vo) {
 		Connection conn = null;
@@ -79,6 +133,40 @@ public class CartDao {
 			pstmt.setLong(1, vo.getCount());
 			pstmt.setLong(2, vo.getBookNo());
 			pstmt.setLong(3, vo.getUserNo());
+		
+			// 4. SQL 실행
+			pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			System.out.println("error: " + e);;
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			
+	}
+	
+	public void orderBookInsert(CartVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+			
+		try {
+			conn = getConnection();
+			
+			// 3. Statement 준비
+			String sql = "insert into order_book(no, cart_no, book_no) values(null, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setLong(1, vo.getNo());
+			pstmt.setLong(2, vo.getBookNo());
 		
 			// 4. SQL 실행
 			pstmt.executeUpdate();

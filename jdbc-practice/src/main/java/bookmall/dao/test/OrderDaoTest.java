@@ -9,28 +9,19 @@ public class OrderDaoTest {
 	   public static void main(String[] args) {
 		      testInsert();
 		      testFindAll();
-		      testFindAll2();
 
 		   }
 
 		   private static void testInsert() {
 			   OrderVo vo = null;
 			   OrderDao dao = new OrderDao();
-		   
-		      vo = new OrderVo();
-		      vo.setOrderNo("20230113-0000001");
-		      vo.setPrice(0);
-		      vo.setAddress("부산시 수영구 광안동");
-		      vo.setUserNo(2L);
-		      vo.setCartNo(1L);
-		      dao.insert(vo);
 		      
 		      vo = new OrderVo();
 		      vo.setOrderNo("20230113-0000002");
 		      vo.setPrice(0);
 		      vo.setAddress("부산시 수영구 남천동");
 		      vo.setUserNo(1L);
-		      vo.setCartNo(2L);
+		      vo.setOrderBookNo(1L);
 		      dao.insert(vo);
 
 		   }
@@ -42,12 +33,5 @@ public class OrderDaoTest {
 					System.out.println(result);
 				}
 		   }
-		   
-		   private static void testFindAll2() {
-				List<OrderVo> list = new OrderDao().findAll();
-				for(OrderVo vo : list) {
-					String result = String.format("[%d] 도서번호: %s, 도서제목: %s, 수량: %d", vo.getNo(), vo.getBookNumber(), vo.getBookTitle(), vo.getCount());
-					System.out.println(result);
-				}
-		   }
+
 }

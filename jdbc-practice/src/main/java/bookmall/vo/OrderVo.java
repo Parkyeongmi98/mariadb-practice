@@ -11,7 +11,7 @@ public class OrderVo {
 	private String bookTitle;
 	private Long count;
 	private Long userNo;
-	private Long cartNo;
+	private Long orderBookNo;
 	
 	public Long getNo() {
 		return no;
@@ -73,17 +73,17 @@ public class OrderVo {
 	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
 	}
-	public Long getCartNo() {
-		return cartNo;
+	public Long getOrderBookNo() {
+		return orderBookNo;
 	}
-	public void setCartNo(Long cartNo) {
-		this.cartNo = cartNo;
+	public void setOrderBookNo(Long orderBookNo) {
+		this.orderBookNo = orderBookNo;
 	}
 	@Override
 	public String toString() {
 		return "OrderVo [no=" + no + ", orderNo=" + orderNo + ", orderName=" + orderName + ", orderEmail=" + orderEmail
 				+ ", price=" + price + ", address=" + address + ", bookNumber=" + bookNumber + ", bookTitle="
-				+ bookTitle + ", count=" + count + ", userNo=" + userNo + ", cartNo=" + cartNo + "]";
+				+ bookTitle + ", count=" + count + ", userNo=" + userNo + ", orderBookNo=" + orderBookNo + "]";
 	}
 	
 }

@@ -65,7 +65,7 @@ public class BookMall {
 	private static void findAllBook() {
 		List<BookVo> list = new BookDao().findAll();
 		for(BookVo vo : list) {
-			String result = String.format("[%d] 책제목: %s, 가격: %d, 카테고리: %s", vo.getNo(), vo.getTitle(), vo.getPrice(), vo.getCategoryName());
+			String result = String.format("[%d] 책제목: %s, 가격: %d원, 카테고리: %s", vo.getNo(), vo.getTitle(), vo.getPrice(), vo.getCategoryName());
 			System.out.println(result);
 		}
 	}
@@ -73,7 +73,7 @@ public class BookMall {
 	private static void findAllCart() {
 		List<CartVo> list = new CartDao().findAll();
 		for(CartVo vo : list) {
-			String result = String.format("[%d] 도서제목: %s, 수량: %d, 가격: %s", vo.getNo(), vo.getTitle(), vo.getCount(), vo.getPrice());
+			String result = String.format("도서제목: %s, 수량: %d개, 가격: %s원", vo.getTitle(), vo.getCount(), vo.getPrice());
 			System.out.println(result);
 		}
 	}
@@ -81,18 +81,18 @@ public class BookMall {
 	private static void findAllOrder() {
 		List<OrderVo> list = new OrderDao().findAll();
 		for(OrderVo vo : list) {
-			String result = String.format("[%d] 주문번호: %s, 주문자: %s, 결제금액: %s, 배송지: %s", vo.getNo(), vo.getOrderNo(), vo.getOrderName() + "/" + vo.getOrderEmail(), vo.getPrice(), vo.getAddress());
+			String result = String.format("[%d] 주문번호: %s, 주문자: %s, 결제금액: %s원, 배송지: %s", vo.getNo(), vo.getOrderNo(), vo.getOrderName() + "/" + vo.getOrderEmail(), vo.getPrice(), vo.getAddress());
 			System.out.println(result);
 		}
 	}
 	
 	private static void findAllOrderBook() {
-		List<OrderVo> list = new OrderDao().findAll();
-		for(OrderVo vo : list) {
-			String result = String.format("[%d] 도서번호: %s, 도서제목: %s, 수량: %d", vo.getNo(), vo.getBookNumber(), vo.getBookTitle(), vo.getCount());
+		List<CartVo> list = new CartDao().OrderBookFind();
+		for(CartVo vo : list) {
+			String result = String.format("[%d] 도서제목: %s, 수량: %d개", vo.getNo(), vo.getTitle(), vo.getCount());
 			System.out.println(result);
 		}
-	}
+   }
 
 }
 
